@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Laporan - Manajemen Gudang</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #0056b3;
+            display: flex;
+            justify-content: center;
+            padding: 0.5rem 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: white;
+            padding: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            margin-bottom: 1rem;
+        }
+
+        .report-card {
+            background-color: #007bff;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .report-card:hover {
+            background-color: #0056b3;
+        }
+
+        .report-card h3 {
+            margin: 0;
+        }
+
+        .report-card p {
+            font-size: 1rem;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 2rem;
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Menu Laporan - Manajemen Gudang</h1>
+    </header>
+    <nav>
+      <a href="tampilanawal.html">Dashboard</a>
+      <a href="supplier.html">Tambah Supplier</a>
+      <a href="returbarang.html">Retur Barang</a>
+      <a href="laporan.html">Laporan</a>
+    </nav>
+    <div class="container">
+        <h2>Pilih Jenis Laporan</h2>
+        
+        <!-- Laporan Stok Barang -->
+        <div class="report-card" onclick="window.location.href='laporan_stok.html'">
+            <h3>Laporan Stok Barang</h3>
+            <p>Laporan terkait jumlah dan kondisi stok barang di gudang.</p>
+        </div>
+
+        <!-- Laporan Penjualan -->
+        <div class="report-card" onclick="window.location.href='laporan_penjualan.html'">
+            <h3>Laporan Penjualan</h3>
+            <p>Laporan mengenai penjualan barang, mencatat transaksi dan jumlah yang terjual.</p>
+        </div>
+
+        <!-- Laporan Supplier -->
+        <div class="report-card" onclick="window.location.href='laporan_supplier.html'">
+            <h3>Laporan Supplier</h3>
+            <p>Laporan mengenai data supplier dan transaksi yang terjadi dengan mereka.</p>
+        </div>
+
+        <!-- Laporan Keuangan -->
+        <div class="report-card" onclick="window.location.href='laporan_keuangan.html'">
+            <h3>Laporan Keuangan</h3>
+            <p>Laporan mengenai pendapatan dan pengeluaran terkait gudang.</p>
+        </div>
+
+        <!-- Laporan Jadwal Pengiriman -->
+        <div class="report-card" onclick="window.location.href='laporan_jadwal_pengiriman.html'">
+            <h3>Laporan Jadwal Pengiriman</h3>
+            <p>Laporan mengenai jadwal pengiriman barang dari gudang.</p>
+        </div>
+
+        <a href="tampilanawal.html" class="back-link">Kembali ke Dashboard</a>
+    </div>
+</body>
+</html>

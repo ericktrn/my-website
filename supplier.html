@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Supplier</title>
+    <style>
+        /* Add the styles from your existing page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #0056b3;
+            display: flex;
+            justify-content: center;
+            padding: 0.5rem 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: white;
+            padding: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            margin-bottom: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .actions {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .actions a, .actions button {
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .actions a:hover, .actions button:hover {
+            background-color: #0056b3;
+        }
+
+        .actions button {
+            border: none;
+            cursor: pointer;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 1rem;
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .form-group button {
+            background-color: #28a745;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .form-group button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Tambah Supplier</h1>
+    </header>
+    <nav>
+        <a href="tampilanawal.html">Dashboard</a>
+        <a href="supplier.html">Tambah Supplier</a>
+        <a href="returbarang.html">Retur Barang</a>
+        <a href="laporan.html">Laporan</a>
+    </nav>
+
+    <div class="container">
+        <h2>Form Tambah Supplier</h2>
+        <form id="supplierForm">
+            <div class="form-group">
+                <label for="supplierName">Nama Supplier</label>
+                <input type="text" id="supplierName" name="supplierName" required>
+            </div>
+            <div class="form-group">
+                <label for="supplierContact">Kontak Supplier</label>
+                <input type="text" id="supplierContact" name="supplierContact" required>
+            </div>
+            <div class="form-group">
+                <label for="supplierAddress">Alamat Supplier</label>
+                <input type="text" id="supplierAddress" name="supplierAddress" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Tambah Supplier</button>
+            </div>
+        </form>
+
+        <h2>Daftar Supplier</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama Supplier</th>
+                    <th>Kontak</th>
+                    <th>Alamat</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="supplierList">
+                <!-- Supplier list will be dynamically added here -->
+            </tbody>
+        </table>
+
+        <a href="tampilanawal.html" class="back-link">Kembali ke Dashboard</a>
+    </div>
+
+    <script>
+        // Function to handle form submission
+        document.getElementById('supplierForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const supplierName = document.getElementById('supplierName').value;
+            const supplierContact = document.getElementById('supplierContact').value;
+            const supplierAddress = document.getElementById('supplierAddress').value;
+
+            // Add the supplier to the list
+            const tableBody = document.getElementById('supplierList');
+            const row = document.createElement('tr');
+
+            const supplierCount = tableBody.rows.length + 1;
+            row.innerHTML = `
+                <td>${supplierCount}</td>
+                <td>${supplierName}</td>
+                <td>${supplierContact}</td>
+                <td>${supplierAddress}</td>
+                <td>
+                    <button onclick="editSupplier(this)">Edit</button>
+                    <button onclick="deleteSupplier(this)">Hapus</button>
+                </td>
+            `;
+
+            tableBody.appendChild(row);
+
+            // Clear the form fields after submission
+            document.getElementById('supplierName').value = '';
+            document.getElementById('supplierContact').value = '';
+            document.getElementById('supplierAddress').value = '';
+        });
+
+        // Function to delete a supplier
+        function deleteSupplier(button) {
+            if (confirm('Apakah Anda yakin ingin menghapus supplier ini?')) {
+                const row = button.parentElement.parentElement;
+                row.remove();
+            }
+        }
+
+        // Function to edit a supplier
+        function editSupplier(button) {
+            const row = button.parentElement.parentElement;
+            const supplierName = row.cells[1].innerText;
+            const supplierContact = row.cells[2].innerText;
+            const supplierAddress = row.cells[3].innerText;
+
+            // Populate the form with current values
+            document.getElementById('supplierName').value = supplierName;
+            document.getElementById('supplierContact').value = supplierContact;
+            document.getElementById('supplierAddress').value = supplierAddress;
+
+            // Change button text to "Update"
+            const submitButton = document.querySelector('.form-group button');
+            submitButton.textContent = 'Update Supplier';
+
+            // When the form is submitted, update the supplier
+            document.getElementById('supplierForm').onsubmit = function(event) {
+                event.preventDefault();
+
+                row.cells[1].innerText = document.getElementById('supplierName').value;
+                row.cells[2].innerText = document.getElementById('supplierContact').value;
+                row.cells[3].innerText = document.getElementById('supplierAddress').value;
+
+                // Reset the form and button text
+                submitButton.textContent = 'Tambah Supplier';
+                document.getElementById('supplierForm').reset();
+            };
+        }
+    </script>
+</body>
+</html>
